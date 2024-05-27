@@ -5,7 +5,7 @@ FROM openjdk:14-jdk-alpine
 WORKDIR /app
 
 # Copy the compiled Java class to the container
-COPY Main.class .
+COPY ./Main.class .
 
 # Command to run the Java program
 CMD ["java", "Main"]
