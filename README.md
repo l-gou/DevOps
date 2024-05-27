@@ -10,3 +10,12 @@ docker run -d -p 5432:5432 --name my-postgres-container --network app-network -e
 
 
 1-2 Why do we need a multistage build? And explain each step of this dockerfile.
+
+
+1-3 Document docker-compose most important commands. 
+
+
+1-4 Document your docker-compose file.
+
+
+1-5 Document your publication commands and published images in dockerhub.

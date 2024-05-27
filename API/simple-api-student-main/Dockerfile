@@ -1,15 +1,12 @@
-# Build
-FROM maven:3.8.6-amazoncorretto-17 AS myapp-build
-ENV MYAPP_HOME /opt/myapp
-WORKDIR $MYAPP_HOME
-COPY pom.xml .
-COPY src ./src
+FROM maven:3.8.6-amazoncorretto-17 AS build
+WORKDIR /app
+COPY pom.xml /app
+RUN mvn dependency:go-offline
+COPY src /app/src
 RUN mvn package -DskipTests
 
-# Run
-FROM amazoncorretto:17
-ENV MYAPP_HOME /opt/myapp
-WORKDIR $MYAPP_HOME
-COPY --from=myapp-build $MYAPP_HOME/target/*.jar $MYAPP_HOME/myapp.jar
 
-ENTRYPOINT java -jar myapp.jar
+FROM amazoncorretto:17
+WORKDIR /app
+COPY --from=build /app/target/*.jar /app/app.jar
+ENTRYPOINT ["java", "-jar", "app.jar"]
