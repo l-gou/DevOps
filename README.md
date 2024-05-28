@@ -20,6 +20,41 @@ docker run -d -p 5432:5432 --name my-postgres-container --network app-network -e
 
 1-4 Document your docker-compose file.
 
+version: '3.7'
+
+services:
+    backend:
+        build:
+          context: "./backend/simple-api-student-main"
+        container_name: "backend_db"
+        networks:
+          - database_prosp
+        depends_on:
+          - database
+
+
+    database:
+        
+        image: pepsouille0/database:latest
+        container_name: "database"
+        networks:
+          - database_prosp
+
+    httpd:
+        build:
+          context: "./server"
+        ports:
+          - "80:80"
+        networks:
+          - database_prosp
+        depends_on:
+         - backend
+         - database
+
+networks:
+    database_prosp:
+
+
 
 1-5 Document your publication commands and published images in dockerhub.
 
