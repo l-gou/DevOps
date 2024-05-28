@@ -49,8 +49,6 @@ jobs:
         env:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-          DOCKER_BUILDKIT: 1
-          DOCKER_CLI_EXPERIMENTAL: enabled          
         with:
           context: ./API/simple-api-student-main
           tags: ${{ secrets.DOCKER_USERNAME }}/my-backend-app:backend-latest
@@ -65,7 +63,8 @@ jobs:
           DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}        
         with:
           tags: ${{ secrets.DOCKER_USERNAME }}/my-postgres-db:database-latest
-          push: ${{ github.ref == 'refs/heads/main' }}
+          push: True
+          #push: ${{ github.ref == 'refs/heads/main' }}
 
       - name: Build image and push httpd
         uses: docker/build-push-action@v3
@@ -75,4 +74,5 @@ jobs:
         with:
           context: ./http
           tags: ${{ secrets.DOCKER_USERNAME }}/my-apache2:httpd-latest
-          push: ${{ github.ref == 'refs/heads/main' }}
+          push: True
+          #push: ${{ github.ref == 'refs/heads/main' }}
