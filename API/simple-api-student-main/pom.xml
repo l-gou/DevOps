@@ -20,6 +20,7 @@
 		<validation.version>2.0.1.Final</validation.version>
 		<sonar.organization>devons</sonar.organization>
   		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<sonar.projectKey>devons_devops</sonar.projectKey>
 	</properties>
 
 	<dependencies>
