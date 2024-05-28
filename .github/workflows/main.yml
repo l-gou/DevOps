@@ -23,4 +23,4 @@ jobs:
 
      #finally build your app with the latest command
       - name: Build and test with Maven
-        run: mvn clean install
+        run: mvn clean install --file /Users/leo/Desktop/EPF_4A/DevOps/API/simple-api-student-main/pom.xml
