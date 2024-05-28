@@ -61,6 +61,3 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/my-apache2:httpd-latest
           push: ${{ github.ref == 'refs/heads/main' }}
 
-    env:
-      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-      DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
