@@ -1,0 +1,10 @@
+/Users/leo/Desktop/EPF_4A/DevOps/API/simple-api-student-main/src/main/java/fr/takima/training/simpleapi/entity/Department.java
+/Users/leo/Desktop/EPF_4A/DevOps/API/simple-api-student-main/src/main/java/fr/takima/training/simpleapi/dao/StudentDAO.java
+/Users/leo/Desktop/EPF_4A/DevOps/API/simple-api-student-main/src/main/java/fr/takima/training/simpleapi/controller/StudentController.java
+/Users/leo/Desktop/EPF_4A/DevOps/API/simple-api-student-main/src/main/java/fr/takima/training/simpleapi/entity/Student.java
+/Users/leo/Desktop/EPF_4A/DevOps/API/simple-api-student-main/src/main/java/fr/takima/training/simpleapi/SimpleApiApplication.java
+/Users/leo/Desktop/EPF_4A/DevOps/API/simple-api-student-main/src/main/java/fr/takima/training/simpleapi/dao/DepartmentDAO.java
+/Users/leo/Desktop/EPF_4A/DevOps/API/simple-api-student-main/src/main/java/fr/takima/training/simpleapi/controller/GreetingController.java
+/Users/leo/Desktop/EPF_4A/DevOps/API/simple-api-student-main/src/main/java/fr/takima/training/simpleapi/service/DepartmentService.java
+/Users/leo/Desktop/EPF_4A/DevOps/API/simple-api-student-main/src/main/java/fr/takima/training/simpleapi/controller/DepartmentController.java
+/Users/leo/Desktop/EPF_4A/DevOps/API/simple-api-student-main/src/main/java/fr/takima/training/simpleapi/service/StudentService.java
