@@ -1,0 +1,21 @@
+
+Wfr.takima.training.simpleapi.service.DepartmentService#getDepartments()Ljava/util/List;‘
+†/Users/leo/Desktop/EPF_4A/DevOps/API/simple-api-student-main/src/main/java/fr/takima/training/simpleapi/service/DepartmentService.java (*"1*¾
+1 (´
+±
+ (!4
+%0.fr.takima.training.simpleapi.dao.DepartmentDAO"__id*i
+
+__unknown_file (M*K8
+6fr.takima.training.simpleapi.service.DepartmentService"
+departmentDAOÓÐ
+ (+
+%1java.util.List"Oorg.springframework.data.jpa.repository.JpaRepository#findAll()Ljava/util/List;*R
+
+__unknown_file (6
+4
+%0.fr.takima.training.simpleapi.dao.DepartmentDAO2	findAll()""
+ (,
+
+%1java.util.ListB:8
+6fr.takima.training.simpleapi.service.DepartmentServiceH
