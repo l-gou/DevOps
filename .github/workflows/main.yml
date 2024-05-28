@@ -46,6 +46,9 @@ jobs:
 
       - name: Build image and push backend
         uses: docker/build-push-action@v3
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         with:
           context: ./API/simple-api-student-main
           tags: ${{ secrets.DOCKER_USERNAME }}/my-backend-app:backend-latest
@@ -53,16 +56,19 @@ jobs:
 
       - name: Build image and push database
         uses: docker/build-push-action@v3
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}        
         with:
           tags: ${{ secrets.DOCKER_USERNAME }}/my-postgres-db:database-latest
           push: ${{ github.ref == 'refs/heads/main' }}
 
       - name: Build image and push httpd
         uses: docker/build-push-action@v3
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}        
         with:
           context: ./http
           tags: ${{ secrets.DOCKER_USERNAME }}/my-apache2:httpd-latest
           push: ${{ github.ref == 'refs/heads/main' }}
-    env:
-      DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-      DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
