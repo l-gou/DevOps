@@ -1,4 +1,5 @@
 # DevOps
+http://school.pages.takima.io/devops-resources/
 
 
 1-1 Document your database container essentials: commands and Dockerfile.
