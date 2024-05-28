@@ -54,6 +54,9 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/my-backend-app:backend-latest
           #push: ${{ github.ref == 'refs/heads/main' }}
           push: True
+        env:
+          DOCKER_BUILDKIT: 1
+          DOCKER_CLI_EXPERIMENTAL: enabled
 
       - name: Build image and push database
         uses: docker/build-push-action@v3
