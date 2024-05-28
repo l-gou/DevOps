@@ -49,14 +49,14 @@ jobs:
         env:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_BUILDKIT: 1
+          DOCKER_CLI_EXPERIMENTAL: enabled          
         with:
           context: ./API/simple-api-student-main
           tags: ${{ secrets.DOCKER_USERNAME }}/my-backend-app:backend-latest
           #push: ${{ github.ref == 'refs/heads/main' }}
           push: True
-        env:
-          DOCKER_BUILDKIT: 1
-          DOCKER_CLI_EXPERIMENTAL: enabled
+
 
       - name: Build image and push database
         uses: docker/build-push-action@v3
