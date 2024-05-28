@@ -54,8 +54,7 @@ jobs:
           context: ./API/simple-api-student-main
           tags: ${{ secrets.DOCKER_USERNAME }}/my-backend-app:backend-latest
           push: ${{ github.ref == 'refs/heads/main' }}
-#          push: True
-
+          #push: True
 
       - name: Build image and push database
         uses: docker/build-push-action@v3
