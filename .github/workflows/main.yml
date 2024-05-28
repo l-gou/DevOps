@@ -23,4 +23,7 @@ jobs:
 
      #finally build your app with the latest command
       - name: Build and test with Maven
-        run: mvn clean install --file /Users/leo/Desktop/EPF_4A/DevOps/API/simple-api-student-main/pom.xml
+        run: mvn clean install --file ./API/simple-api-student-main/pom.xml
+        env:
+          JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.11-9/x64
+          JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.11-9/x64
