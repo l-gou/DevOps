@@ -121,9 +121,9 @@ To configurat the gate properly, there is some step mandatory.
 
 ## TP3
 
-http://leo.goutard.takima.cloud/
-http://leo.goutard.takima.cloud/department/IRC/students
-http://leo.goutard.takima.cloud/actuator/health
+- http://leo.goutard.takima.cloud/
+- http://leo.goutard.takima.cloud/department/IRC/students
+- http://leo.goutard.takima.cloud/actuator/health
 
 ### 3-1 Document your inventory and base commands
 
