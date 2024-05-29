@@ -108,14 +108,15 @@ To have more information on the Github Actions configurations, it is necessary t
 To configurat the gate properly, there is some step mandatory.
 
 - Add this to pom.xml:
-<properties>
+  
+`<properties>
   	<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<sonar.projectKey>devons_devops</sonar.projectKey>
-</properties>
+</properties>`
 
-- Change 'run: mvn clean install --file ./API/simple-api-student-main/pom.xml' in  .github/workflows/test-backend.yml by the line bellow. Where devons_devops & devons are some key from sonar and SONAR_TOKEN is a variable store in github to save the connection token.
+- Change `run: mvn clean install --file ./API/simple-api-student-main/pom.xml` in  .github/workflows/test-backend.yml by the line bellow. Where devons_devops & devons are some key from sonar and SONAR_TOKEN is a variable store in github to save the connection token.
 
-run: mvn -B verify sonar:sonar -Dsonar.projectKey=devons_devops -Dsonar.organization=devons -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}  --file ./API/simple-api-student-main/pom.xml
+`run: mvn -B verify sonar:sonar -Dsonar.projectKey=devons_devops -Dsonar.organization=devons -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}  --file ./API/simple-api-student-main/pom.xml`
 
 
 ## TP3
