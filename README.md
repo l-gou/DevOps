@@ -8,14 +8,17 @@ http://school.pages.takima.io/devops-resources/
 
 docker run -d --name my-postgres-container -p 5432:5432 my-postgres-db:v1.0
 
-docker run -d -p 5432:5432 --name my-postgres-container --network app-network -e POSTGRES_PASSWORD=pwd -v /Users/leo/Desktop/EPF_4A/DevOps/tp1:/var/lib/postgresql/data my-postgres-db:v1.0
+docker run -d -p 5432:5432 --name my-postgres-container --network app-network -e POSTGRES_PASSWORD=pwd -v /Users/leo/Desktop/EPF_4A/DevOps/tp1:/var/lib/postgresql/tp1 my-postgres-db:v1.0
 
+docker run --name backend-app --network my-network -p 8080:8080 -d my-backend-app:v1.0
+
+docker run -dit --name my-running-app --network app-network -p 8085:80 my-apache2:v1.0 
 
 
 1-2 Why do we need a multistage build? And explain each step of this dockerfile.
 
 
-1-3 Document docker-compose most important commands. 
+1-3 Document docker-compose most important commands.
 
 
 1-4 Document your docker-compose file.

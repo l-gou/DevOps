@@ -16,3 +16,5 @@
     restart_policy: always
     networks:
       - name: app-network
+    ports:
+      - "5432:5432"
