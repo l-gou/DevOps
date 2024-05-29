@@ -9,7 +9,7 @@
 
 - name: Run proxy container
   docker_container:
-    name: my_proxy
+    name: my-running-app
     image: leogou/my-apache2:httpd-latest
     state: started
     restart_policy: always

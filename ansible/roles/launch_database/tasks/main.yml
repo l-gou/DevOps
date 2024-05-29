@@ -10,7 +10,7 @@
 
 - name: Run database container
   docker_container:
-    name: database
+    name: my-postgres-container
     image: leogou/my-postgres-db:database-latest
     state: started
     restart_policy: always
