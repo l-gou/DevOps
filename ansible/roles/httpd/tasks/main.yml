@@ -1,8 +1,12 @@
 # Install mysql db
+
+# This task installs the mysql_db package using the yum module.
 - name: Install mysql 
   yum: ## I am a module
     name: mysql_db
     state: present
+
+# This task installs the httpd package using the yum module.
 - name: Install httpd
   yum:
     name: httpd

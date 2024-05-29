@@ -1,11 +1,12 @@
 ---
 # tasks file for roles/launch_app
 
-# roles/launch_app/tasks/main.yml
+# This task ensures that the app network exists using the docker_network module.
 - name: Ensure app network exists
   docker_network:
     name: app-network
 
+# This task runs the application container using the docker_container module.
 - name: Run application container
   docker_container:
     name: backend-app
@@ -16,4 +17,3 @@
       - name: app-network
     ports:
       - "8080:8080"
-

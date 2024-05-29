@@ -1,10 +1,15 @@
+# This section is commented out.
+# It defines a playbook that targets all hosts and specifies to become a super user.
+# It includes roles for configuring the Apache HTTP server and the firewall.
 #- hosts: all
-  #become: yes ## Yes I want to become a super user 
-  #roles:
-  #  - httpd
-  #  - firewalld
+#  become: yes ## Yes I want to become a super user 
+#  roles:
+#    - httpd
+#    - firewalld
 
-
+# This section is also commented out.
+# It defines a playbook that targets all hosts and disables gathering facts.
+# It runs as the super user and includes a task to test connection by pinging each host.
 #- hosts: all
 #  gather_facts: false
 #  become: true
@@ -12,6 +17,9 @@
 #   - name: Test connection
 #     ping:
 
+# This section is active.
+# It defines a playbook that targets all hosts and disables gathering facts.
+# It runs as the super user and includes multiple roles to be executed.
 - hosts: all
   gather_facts: false
   become: true

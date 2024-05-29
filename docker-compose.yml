@@ -1,33 +1,36 @@
-version: '3.7'
+version: '3.7'  # Specify the version of the Compose file format
 
 services:
+    # Define the backend service
     backend:
         build:
-          context: ./API/simple-api-student-main
-          dockerfile: Dockerfile
+          context: ./API/simple-api-student-main  # Directory containing the Dockerfile for the backend service
+          dockerfile: Dockerfile  # Name of the Dockerfile to use for building the image
         networks:
-          - app-network
+          - app-network  # Attach this service to the app-network
         depends_on:
-          - database
+          - database  # Ensure that the database service is started before this service
 
+    # Define the database service
     database:
         build:
-          dockerfile: Dockerfile
+          dockerfile: Dockerfile  # Name of the Dockerfile to use for building the image (context is implicitly the current directory)
         networks:
-          - app-network
+          - app-network  # Attach this service to the app-network
 
+    # Define the HTTP server service
     httpd:
         build:
-          context: ./http
-          dockerfile: Dockerfile
+          context: ./http  # Directory containing the Dockerfile for the HTTP server service
+          dockerfile: Dockerfile  # Name of the Dockerfile to use for building the image
         ports:
-          - "8085:80"
+          - "8085:80"  # Map port 8085 on the host to port 80 on the container
         networks:
-          - app-network
+          - app-network  # Attach this service to the app-network
         depends_on:
-          - backend
-          - database
+          - backend  # Ensure that the backend service is started before this service
+          - database  # Ensure that the database service is started before this service
 
-
+# Define the network
 networks:
-    app-network:
+    app-network:  # Name of the network

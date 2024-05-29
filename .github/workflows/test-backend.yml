@@ -1,32 +1,36 @@
-name: CI devops 2024 / test-backend
+name: CI devops 2024 / test-backend  # Name of the GitHub Actions workflow
+
 on:
-  #to begin you want to launch this job in main and develop
+  # Define the events triggering this workflow
   push:
     branches: 
       - main
-      - develop
-  pull_request:
+      - develop  # Trigger the workflow on pushes to the main and develop branches
+  pull_request:  # Trigger the workflow on pull requests
 
 jobs:
-  test-backend: 
-    runs-on: ubuntu-22.04
-    steps:
-     #checkout your github code using actions/checkout@v2.5.0
-      - uses: actions/checkout@v2.5.0
+  test-backend:  # Define a job named test-backend
+    runs-on: ubuntu-22.04  # Specify the operating system for the job
+    
+    steps:  # Define the steps to be executed in the job
+      
+      # Step 1: Checkout the GitHub repository code
+      - uses: actions/checkout@v2.5.0  # Use the actions/checkout action to checkout the repository code
 
-     #do the same with another action (actions/setup-java@v3) that enable to setup jdk 17
+      # Step 2: Set up JDK 17
       - name: Set up JDK 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v3  # Use the actions/setup-java action to set up JDK 17
         with:
-          distribution: 'temurin'
-          java-version: '17'
+          distribution: 'temurin'  # Use Temurin JDK distribution
+          java-version: '17'  # Use JDK version 17
 
-     #finally build your app with the latest command
+      # Step 3: Build and test the app with Maven and SonarQube
       - name: Build and test with Maven
         run: mvn -B verify sonar:sonar -Dsonar.projectKey=devons_devops -Dsonar.organization=devons -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}  --file ./API/simple-api-student-main/pom.xml
-        #run: mvn clean install --file ./API/simple-api-student-main/pom.xml
+        # Run Maven to verify the project, run tests, and analyze code with SonarQube
+        # The SonarQube project key, organization, host URL, and login token are provided as parameters
+        # Alternative command: mvn clean install --file ./API/simple-api-student-main/pom.xml
         env:
-          JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.11-9/x64
-          JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.11-9/x64
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
+          JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.11-9/x64  # Set the JAVA_HOME environment variable to the JDK 17 path
+          JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.11-9/x64  # Set the JAVA_HOME_17_X64 environment variable to the JDK 17 path
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # Set the SONAR_TOKEN environment variable to the secret value provided from the GitHub repository secrets

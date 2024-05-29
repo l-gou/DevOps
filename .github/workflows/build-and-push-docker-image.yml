@@ -1,57 +1,64 @@
-name: CI Build and Push Docker Image
+name: CI Build and Push Docker Image  # Name of the GitHub Actions workflow
 
 on:
+  # Define the event that triggers this workflow
   workflow_run:
-    workflows: ["CI devops 2024 / test-backend"]
+    workflows: ["CI devops 2024 / test-backend"]  # Run this workflow when the specified workflow completes
     types:
-      - completed
+      - completed  # Trigger when the specified workflow completes
     branches: 
-      - main
-  
+      - main  # Trigger on pushes to the main branch
 
 jobs:
-  build-and-push-docker-image:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    runs-on: ubuntu-22.04
+  build-and-push-docker-image:  # Define a job named build-and-push-docker-image
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}  # Conditionally execute this job if the specified workflow completes successfully
+    runs-on: ubuntu-22.04  # Specify the operating system for the job
 
-    steps:
+    steps:  # Define the steps to be executed in the job
+      
+      # Step 1: Checkout the GitHub repository code
       - name: Checkout code
-        uses: actions/checkout@v2.5.0
+        uses: actions/checkout@v2.5.0  # Use the actions/checkout action to checkout the repository code
 
+      # Step 2: Login to DockerHub
       - name: Login to DockerHub
         env:
-          DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}  # Set the DockerHub username from GitHub repository secrets
+          DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}  # Set the DockerHub password from GitHub repository secrets
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}  # Log in to DockerHub using the provided credentials
 
+      # Step 3: Build and push the backend Docker image
       - name: Build image and push backend
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v3  # Use the docker/build-push-action action to build and push Docker images
         env:
-          DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}  # Set the DockerHub username from GitHub repository secrets
+          DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}  # Set the DockerHub password from GitHub repository secrets
         with:
-          context: ./API/simple-api-student-main
-          tags: ${{ secrets.DOCKER_USERNAME }}/my-backend-app:backend-latest
-          push: ${{ github.ref == 'refs/heads/main' }}
+          context: ./API/simple-api-student-main  # Specify the context directory for building the Docker image
+          tags: ${{ secrets.DOCKER_USERNAME }}/my-backend-app:backend-latest  # Specify the Docker image tags
+          push: ${{ github.ref == 'refs/heads/main' }}  # Conditionally push the Docker image based on the branch being main
           #push: True
 
+
+      # Step 4: Build and push the database Docker image
       - name: Build image and push database
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v3  # Use the docker/build-push-action action to build and push Docker images
         env:
-          DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}        
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}  # Set the DockerHub username from GitHub repository secrets
+          DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}  # Set the DockerHub password from GitHub repository secrets
         with:
-          tags: ${{ secrets.DOCKER_USERNAME }}/my-postgres-db:database-latest
-          push: True
+          tags: ${{ secrets.DOCKER_USERNAME }}/my-postgres-db:database-latest  # Specify the Docker image tags
+          push: True  # Always push the Docker image
           #push: ${{ github.ref == 'refs/heads/main' }}
 
+      # Step 5: Build and push the httpd Docker image
       - name: Build image and push httpd
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v3  # Use the docker/build-push-action action to build and push Docker images
         env:
-          DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}        
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}  # Set the DockerHub username from GitHub repository secrets
+          DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}  # Set the DockerHub password from GitHub repository secrets
         with:
-          context: ./http
-          tags: ${{ secrets.DOCKER_USERNAME }}/my-apache2:httpd-latest
-          push: True
+          context: ./http  # Specify the context directory for building the Docker image
+          tags: ${{ secrets.DOCKER_USERNAME }}/my-apache2:httpd-latest  # Specify the Docker image tags
+          push: True  # Always push the Docker image
           #push: ${{ github.ref == 'refs/heads/main' }}

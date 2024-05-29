@@ -1,8 +1,11 @@
-all: 
-  vars:
-    ansible user: centos
-    ansible_ssh_private_key_file: ./ansible/id_rsa 
-    #ansible_ssh_private_key: ${{ secrets.ID_RSA }}
-  children:
-    prod:
-      hosts: leo.goutard.takima.cloud
+all:  # Define groups and variables for all hosts
+
+  vars:  # Define variables that apply to all hosts
+    ansible_user: centos  # Define the default SSH username for Ansible connections
+    ansible_ssh_private_key_file: ./ansible/id_rsa  # Define the path to the SSH private key file for Ansible connections
+    # ansible_ssh_private_key: ${{ secrets.ID_RSA }}  # Optionally, use a secret SSH private key from GitHub Secrets
+
+  children:  # Define child groups of hosts
+  
+    prod:  # Define a group named prod for production hosts
+      hosts: leo.goutard.takima.cloud  # Specify the hostname or IP address of the production host

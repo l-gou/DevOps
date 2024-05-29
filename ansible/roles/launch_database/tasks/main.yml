@@ -1,13 +1,12 @@
 ---
 # tasks file for roles/launch_database
 
-# roles/launch_database/tasks/main.yml
-
+# This task ensures that the app network exists using the docker_network module.
 - name: Ensure app network exists
   docker_network:
     name: app-network
 
-
+# This task runs the database container using the docker_container module.
 - name: Run database container
   docker_container:
     name: my-postgres-container

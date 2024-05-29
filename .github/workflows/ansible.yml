@@ -1,12 +1,13 @@
-name: Ansible
+name: Ansible  # Name of the GitHub Actions workflow
 
 on:
+  # Define the event that triggers this workflow
   workflow_run:
-    workflows: ["CI Build and Push Docker Image"]
+    workflows: ["CI Build and Push Docker Image"]  # Run this workflow when the specified workflow completes
     types:
-      - completed
+      - completed  # Trigger when the specified workflow completes
     branches: 
-      - main
+      - main  # Trigger on pushes to the main branch
 
 #jobs:
 #  update-ansible:
@@ -18,42 +19,49 @@ on:
 #      - name: ansible
 #        run: ansible-playbook -i ./ansible/inventories/setup.yml ./ansible/playbook.yml
 
-
 jobs:
   deploy:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}  # Conditionally execute this job if the specified workflow completes successfully
+    runs-on: ubuntu-latest  # Specify the operating system for the job
 
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+    steps:  # Define the steps to be executed in the job
 
-    - name: Set up SSH
-      uses: webfactory/ssh-agent@v0.5.3
-      with:
-        ssh-private-key: ${{ secrets.ID_RSA }}
+      # Step 1: Checkout the GitHub repository code
+      - name: Checkout repository
+        uses: actions/checkout@v2  # Use the actions/checkout action to checkout the repository code
 
-    - name: Adjust SSH key permissions
-      run: |
-        mkdir -p ~/.ssh
-        echo "${{ secrets.ID_RSA }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
+      # Step 2: Set up SSH
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3  # Use the webfactory/ssh-agent action to set up SSH
+        with:
+          ssh-private-key: ${{ secrets.ID_RSA }}  # Set the SSH private key from GitHub repository secrets
 
-    - name: Debug SSH key
-      run: |
-        ls -l ~/.ssh
-        cat ~/.ssh/id_rsa | head -c 100
+      # Step 3: Adjust SSH key permissions
+      - name: Adjust SSH key permissions
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.ID_RSA }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
 
-    - name: Install Ansible
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y ansible
+      # Step 4: Debug SSH key
+      - name: Debug SSH key
+        run: |
+          ls -l ~/.ssh
+          cat ~/.ssh/id_rsa | head -c 100
 
-    - name: Disable host key checking
-      run: echo "ANSIBLE_HOST_KEY_CHECKING=False" >> $GITHUB_ENV
+      # Step 5: Install Ansible
+      - name: Install Ansible
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ansible  # Install Ansible
 
-    - name: Run deployment playbook
-      run: |
-        ansible-playbook -i ansible/inventories/setup.yml ansible/playbook.yml
-      env:
-        ANSIBLE_HOST_KEY_CHECKING: False
+      # Step 6: Disable host key checking
+      - name: Disable host key checking
+        run: echo "ANSIBLE_HOST_KEY_CHECKING=False" >> $GITHUB_ENV
+
+      # Step 7: Run deployment playbook
+      - name: Run deployment playbook
+        run: |
+          ansible-playbook -i ansible/inventories/setup.yml ansible/playbook.yml  # Run the Ansible playbook for deployment
+        env:
+          ANSIBLE_HOST_KEY_CHECKING: False  # Set the ANSIBLE_HOST_KEY_CHECKING environment variable to False
