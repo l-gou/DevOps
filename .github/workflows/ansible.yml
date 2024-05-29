@@ -15,9 +15,5 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2.5.0
-      - name: Decrypt SSH key
-        run: |
-          echo "${{ secrets.ID_RSA }}" > /tmp/id_rsa
-          chmod 600 /tmp/id_rsa
       - name: ansible
         run: ansible-playbook -i ./ansible/inventories/setup.yml ./ansible/playbook.yml
