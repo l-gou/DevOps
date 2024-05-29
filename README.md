@@ -68,6 +68,7 @@ networks:
 
 2-3 Document your quality gate configuration.
 
+<<<<<<< HEAD
 
 ## TP3
 
@@ -90,3 +91,8 @@ ansible -i inventories/setup.yml all -m shell -a 'echo "<html><h1>Hello World</h
 
 
 
+=======
+ahhah
+>>>>>>> 329948d9c691bfdbe529e2aedad675be500d4396
+
+aaze
