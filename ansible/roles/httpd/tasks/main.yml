@@ -1,0 +1,9 @@
+# Install mysql db
+- name: Install mysql 
+  yum: ## I am a module
+    name: mysql_db
+    state: present
+- name: Install httpd
+  yum:
+    name: httpd
+    state: present

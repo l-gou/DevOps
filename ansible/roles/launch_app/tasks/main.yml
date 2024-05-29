@@ -1,0 +1,17 @@
+---
+# tasks file for roles/launch_app
+
+# roles/launch_app/tasks/main.yml
+- name: Ensure app network exists
+  docker_network:
+    name: app-network
+
+- name: Run application container
+  docker_container:
+    name: my_app
+    image: leogou/my-backend-app:backend-latest
+    state: started
+    restart_policy: always
+    networks:
+      - name: app-network
+

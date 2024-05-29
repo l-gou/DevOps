@@ -1,0 +1,18 @@
+---
+# tasks file for roles/launch_database
+
+# roles/launch_database/tasks/main.yml
+
+- name: Ensure app network exists
+  docker_network:
+    name: app-network
+
+
+- name: Run database container
+  docker_container:
+    name: database
+    image: leogou/my-postgres-db:database-latest
+    state: started
+    restart_policy: always
+    networks:
+      - name: app-network

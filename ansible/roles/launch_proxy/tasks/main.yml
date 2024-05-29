@@ -1,0 +1,20 @@
+---
+# tasks file for roles/launch_proxy
+
+
+# roles/launch_proxy/tasks/main.yml
+- name: Ensure app network exists
+  docker_network:
+    name: app-network
+
+- name: Run proxy container
+  docker_container:
+    name: my_proxy
+    image: leogou/my-apache2:httpd-latest
+    state: started
+    restart_policy: always
+    networks:
+      - name: app-network
+    ports:
+      - "80:80"
+

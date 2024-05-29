@@ -1,0 +1,7 @@
+---
+# tasks file for roles/create_network
+
+# roles/create_network/tasks/main.yml
+- name: Create Docker network
+  docker_network:
+    name: app-network

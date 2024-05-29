@@ -68,3 +68,25 @@ networks:
 
 2-3 Document your quality gate configuration.
 
+
+## TP3
+
+ssh -i ~/Desktop/EPF_4A/DevOps/ansible/id_rsa centos@leo.goutard.takima.cloud
+ssh -i ansible/id_rsa centos@leo.goutard.takima.cloud
+
+ansible -i inventories/setup.yml all -m ping
+ansible -i inventories/setup.yml all -m yum -a "name=httpd state=present" --private-key=id_rsa -u centos (-b)
+
+ansible -i inventories/setup.yml all -m shell -a 'echo "<html><h1>Hello World</h1></html>" >> /var/www/html/index.html' --private-key=id_rsa -u centos --become
+
+
+3 Point to document/report
+
+3-1 Document your inventory and base commands
+
+3-2 Document your playbook
+
+3-3 Document your docker_container tasks configuration.
+
+
+
