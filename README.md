@@ -121,6 +121,10 @@ To configurat the gate properly, there is some step mandatory.
 
 ## TP3
 
+http://leo.goutard.takima.cloud/
+http://leo.goutard.takima.cloud/department/IRC/students
+http://leo.goutard.takima.cloud/actuator/health
+
 ### 3-1 Document your inventory and base commands
 
 To have more information on the inventory, it is necessary to check the respective ansible/inventories/setup.yml file.
