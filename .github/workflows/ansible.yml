@@ -31,7 +31,7 @@ jobs:
     - name: Set up SSH
       uses: webfactory/ssh-agent@v0.5.3
       with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        ssh-private-key: ${{ secrets.ID_RSA }}
 
     - name: Install Ansible
       run: |
@@ -43,6 +43,6 @@ jobs:
 
     - name: Run deployment playbook
       run: |
-        ansible-playbook -i ansible/inventory/setup.yml ansible/playbook.yml
+        ansible-playbook -i ansible/inventories/setup.yml ansible/playbook.yml
       env:
         ANSIBLE_HOST_KEY_CHECKING: False
