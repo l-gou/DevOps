@@ -2,3 +2,5 @@ ssh -i ~/Desktop/EPF_4A/DevOps/ansible/id_rsa centos@leo.goutard.takima.cloud
 
 ping leo.goutard.takima.cloud
 ping 3.255.114.84
+
+ssh-keygen -f "/Users/lgoutard/.ssh/known_hosts" -R "leo.goutard.takima.cloud"
