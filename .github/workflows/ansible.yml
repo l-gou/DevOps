@@ -37,17 +37,17 @@ jobs:
           ssh-private-key: ${{ secrets.ID_RSA }}  # Set the SSH private key from GitHub repository secrets
 
       # Step 3: Adjust SSH key permissions
-      - name: Adjust SSH key permissions
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.ID_RSA }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
+      #- name: Adjust SSH key permissions
+      #  run: |
+      #    mkdir -p ~/.ssh
+      #    echo "${{ secrets.ID_RSA }}" > ~/.ssh/id_rsa
+      #    chmod 600 ~/.ssh/id_rsa
 
       # Step 4: Debug SSH key
-      - name: Debug SSH key
-        run: |
-          ls -l ~/.ssh
-          cat ~/.ssh/id_rsa | head -c 100
+      #- name: Debug SSH key
+      #  run: |
+      #    ls -l ~/.ssh
+      #    cat ~/.ssh/id_rsa | head -c 100
 
       # Step 5: Install Ansible
       - name: Install Ansible
@@ -62,6 +62,7 @@ jobs:
       # Step 7: Run deployment playbook
       - name: Run deployment playbook
         run: |
-          ansible-playbook -i ansible/inventories/setup.yml ansible/playbook.yml  # Run the Ansible playbook for deployment
+          ansible-playbook -i ansible/inventories/setup.yml ansible/playbook.yml   
+      # Run the Ansible playbook for deployment
         env:
           ANSIBLE_HOST_KEY_CHECKING: False  # Set the ANSIBLE_HOST_KEY_CHECKING environment variable to False
